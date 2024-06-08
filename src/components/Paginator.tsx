@@ -9,7 +9,7 @@ export interface Props {
 
 const Paginator: FC<Props> = ({ paginationResult, setPage }) => {
 
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)
     }
 

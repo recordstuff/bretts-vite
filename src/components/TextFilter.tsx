@@ -1,6 +1,5 @@
-import { Dispatch, FC, SetStateAction, useEffect } from 'react';
-import { Grid, Pagination, TextField, Typography } from '@mui/material';
-import { PaginationResult } from '../models/PaginationResult';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { TextField } from '@mui/material';
 
 export interface Props {
     label: string

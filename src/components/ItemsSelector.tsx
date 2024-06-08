@@ -34,12 +34,12 @@ const ItemsSelector: FC<Props> = ({ allItems, initiallySelectedItems, label, sel
         handleClick(event, selected, setSelected, available, setAvailable)
     }
 
-    const handleClickSelectAll = (event: MouseEvent<HTMLElement>): void => {
+    const handleClickSelectAll = (): void => {
         setAvailable([])
         setSelected(allItems);
     }
 
-    const handleClickDeselectAll = (event: MouseEvent<HTMLElement>): void => {
+    const handleClickDeselectAll = (): void => {
         setSelected([]);
         setAvailable(allItems)
     }
