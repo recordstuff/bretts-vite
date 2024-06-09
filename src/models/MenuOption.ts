@@ -8,3 +8,8 @@ export interface MenuOption {
     Role: JwtRole
     ChildRoutes?: string[]
 }
+
+export const divider = Symbol("divider")
+
+export type DrawerMenuItem = MenuOption | typeof divider
+

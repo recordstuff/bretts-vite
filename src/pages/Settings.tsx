@@ -10,7 +10,7 @@ const Settings: FC = () => {
     useEffect(() => {
         setPageTitle('Settings')
         dispatch(firstBreadcrumb({title:'Settings', url: '/settings'}))
-    }, [setPageTitle])
+    }, [setPageTitle, dispatch])
     
     return (
     <>

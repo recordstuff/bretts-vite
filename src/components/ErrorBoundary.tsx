@@ -74,4 +74,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     clearAllWaits: () => dispatch(clearAllWaits()),
 });
 
-export default connect(null, mapDispatchToProps)(ErrorBoundary)
+const connectedErrorBoundary =  connect(null, mapDispatchToProps)(ErrorBoundary)
+
+export default connectedErrorBoundary

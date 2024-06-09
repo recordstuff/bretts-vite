@@ -3,7 +3,7 @@ import { Grid, Pagination, Typography } from '@mui/material';
 import { PaginationResult } from '../models/PaginationResult';
 
 export interface Props {
-    paginationResult: PaginationResult<Object>
+    paginationResult: PaginationResult<object>
     setPage: Dispatch<SetStateAction<number>>
 }
 

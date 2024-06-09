@@ -11,7 +11,7 @@ const GridExample: FC = () => {
     useEffect(() => {
         setPageTitle('Grid Example')
         dispatch(firstBreadcrumb({title:'Grid Example', url: '/gridexample'}))
-    }, [setPageTitle])
+    }, [setPageTitle, dispatch])
 
     // no need to use <></> as it is only one parent component to return.
 

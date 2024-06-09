@@ -11,6 +11,18 @@ class JwtUtil {
         return expirationSeconds <= Date.now() / 1000
     }
 
+    public hasMultipleRoles(): boolean {
+        if (this.isExpired) return false
+
+        const rolesStr = localStorage.getItem(JwtField.Roles)
+
+        if (rolesStr === null) return false
+
+        const roles: string[] = JSON.parse(rolesStr)
+
+        return roles.length > 1
+    }
+
     public hasRole(role: JwtRole) : boolean {
         if (this.isExpired) return false
         

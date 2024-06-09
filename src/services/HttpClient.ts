@@ -61,7 +61,7 @@ export abstract class HttpClient extends HttpBase {
         this._basePath = basePath
     }
 
-    protected async get<Response>(url: string, params: any = null): Promise<Response> {
+    protected async get<Response>(url: string, params: object | null = null): Promise<Response> {
         const response = await this.client.get<Response>(`${this._basePath}/${url}`, {params})
 
         return response.data

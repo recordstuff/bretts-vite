@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from "react"
+import { FC, useState } from "react"
 import { Outlet, Link } from "react-router-dom"
 import PrivateRoute from "../components/PrivateRoute"
 import { AppBar, Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from "@mui/material"
@@ -8,14 +8,14 @@ import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { MenuOption } from "../models/MenuOption";
+import { DrawerMenuItem, MenuOption, divider } from "../models/MenuOption";
 import { JwtField, JwtRole } from "../models/Jwt";
 import { jwtUtil } from "../wrappers/JwtUtil"
 import { Breadcrumbinator } from "../components/Breadcruminator";
 
 const drawerWidth = 200
-let lastRole = JwtRole.Any
-const menuOptions: MenuOption[] = [
+
+const menuOptions: DrawerMenuItem[] = [
     {
         Text: "Home",
         Route: "/",
@@ -40,6 +40,7 @@ const menuOptions: MenuOption[] = [
         Icon: AgricultureIcon,
         Role: JwtRole.User,
     },
+    divider,
     {
         Text: "Users",
         Route: "/users",
@@ -92,24 +93,25 @@ const Layout: FC = () => {
                     variant="permanent"
                     anchor="left"
                 >
-                    <List> {/* notice the use of Fragment vs <></> since we need the key property */}
-                        {menuOptions.map((menuOption) => {
-                            let component = jwtUtil.hasRole(menuOption.Role) ? (
-                                <Fragment key={menuOption.Text}>
-                                    {menuOption.Role === JwtRole.Admin && lastRole === JwtRole.User && <Divider />}
-                                    <ListItem disablePadding component={Link} to={menuOption.Route} className='menu-link' >
-                                        <ListItemButton selected={menuOption.Route === window.location.pathname
-                                            || menuOption.ChildRoutes?.some(cr => window.location.pathname.startsWith(cr))}>
-                                            <ListItemIcon>
-                                                <menuOption.Icon />
-                                            </ListItemIcon>
-                                            <ListItemText primary={menuOption.Text} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                </Fragment>
-                            ) : null // fragment shorthand does not work here (listitem key)
-                            lastRole = menuOption.Role
-                            return component
+                    <List>
+                        {menuOptions.map((menuItem, index) => {
+                            if (menuItem === divider && jwtUtil.hasMultipleRoles()) {
+                                return <Divider key={`divider ${index}`} />
+                            }
+
+                            const menuOption = menuItem as MenuOption
+
+                            return jwtUtil.hasRole(menuOption.Role) ? (
+                                <ListItem disablePadding component={Link} to={menuOption.Route} className='menu-link' key={menuOption.Text}>
+                                    <ListItemButton selected={menuOption.Route === window.location.pathname
+                                        || menuOption.ChildRoutes?.some(cr => window.location.pathname.startsWith(cr))}>
+                                        <ListItemIcon>
+                                            <menuOption.Icon />
+                                        </ListItemIcon>
+                                        <ListItemText primary={menuOption.Text} />
+                                    </ListItemButton>
+                                </ListItem>
+                            ) : null
                         })}
                     </List>
                 </Drawer>

@@ -46,7 +46,7 @@ const Layout: FC = () => {
 
     const credentialsChanged = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setIsInvalidCredentials(false)
-        let newCreds = { ...userCredentials }
+        const newCreds = { ...userCredentials }
         newCreds[event.target.name as keyof UserCredentials] = event.target.value
         setUserCredentials(newCreds)
     }

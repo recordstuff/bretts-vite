@@ -69,8 +69,8 @@ const User: FC = () => {
             return;
         }
 
-        let newUser = { ...user }
-        newUser[event.target.name as keyof UserDetail] = event.target.value as any
+        const newUser = { ...user }
+        newUser[event.target.name as keyof UserDetail] = event.target.value as string & NameGuidPair[]
         setUser(newUser)
     }
 
