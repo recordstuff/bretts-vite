@@ -48,17 +48,6 @@ class JwtUtil {
                     body = body.padEnd(padding)
                 }
 
-/*              const jwt: Jwt = new Map()
-                const fields = Object.entries(JSON.parse(atob(body)))
-
-                for (const [key, value] of fields) {
-                    jwt.set(key as JwtField, value as string | number | string[])
-                }
-
-                const expirationSeconds = jwt.get(JwtField.ExpirationSeconds) as string
-                let roles = jwt.get(JwtField.Roles)
-                const displayName: string = jwt.get(JwtField.DisplayName) as string
-*/
                 const jwt: Record<JwtField, string | number | string[]> = JSON.parse(atob(body))
                 
                 const expirationSeconds = jwt[JwtField.ExpirationSeconds] as string

@@ -1,7 +1,7 @@
-export interface Login
+export interface LoginSession
 {
     DisplayName: string,
-    ExpirationSeconds: number,
+    ExpirationSeconds: bigint,
     Roles: string[],
     Token: string
 }

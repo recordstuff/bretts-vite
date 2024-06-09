@@ -37,7 +37,6 @@ export const BreadcrumbsSlice = createSlice({
     },
     reducers: {
         atHome: (state) => {
-            // code in here is converted to immutable code for you by redux toolkit
             state.visitedPages = []
             localStorage.setItem(SESSION_KEY, JSON.stringify(state))
         },
