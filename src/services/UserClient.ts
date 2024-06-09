@@ -5,14 +5,15 @@ import { UserCredentials } from "../models/UserCredentials";
 import { HttpClient } from "./HttpClient";
 import { UserDetail } from "../models/UserDetail";
 import { UserNew } from "../models/UserNew";
+import { Login } from "../models/Login";
 
 class UserClient extends HttpClient {
     constructor() {
         super('user')
     }
 
-    public login(userCredentials: UserCredentials): Promise<string> {
-        return this.post<UserCredentials, string>('login', userCredentials)
+    public login(userCredentials: UserCredentials): Promise<Login> {
+        return this.post<UserCredentials, Login>('login', userCredentials)
     }
 
     public getUsers(

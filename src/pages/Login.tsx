@@ -25,7 +25,9 @@ const Layout: FC = () => {
 
             dispatch(pleaseWait())
 
-            jwtUtil.token = await userClient.login(userCredentials)
+            const result = await userClient.login(userCredentials)
+
+            jwtUtil.token = result.Token
 
             dispatch(doneWaiting())
 
